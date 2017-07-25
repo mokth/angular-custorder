@@ -1,0 +1,56 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="logo pull-left" href="#"><img width="100" height="30" src="./assets/logo.png"></a>
+            <span class="name pull-left"></span>
+          </div>     
+        </div>
+</nav>
+
+<div class="jumbotron vertical-center">
+ <div class="container text-center">
+  <div class="center-block">
+    <div class="row center-block">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+              <form class="form-signin" (ngSubmit)="onSignin(f)" #f="ngForm">
+                  <h2 class="form-signin-heading"><span class="glyphicon glyphicon-user"></span> Please sign in</h2>
+                  <div class=form-group>
+                    <label for="inputEmail" class="sr-only">User Name</label>
+                    <input type="text" id="inputEmail" class="form-control" name="name" ngModel class="form-control" placeholder="User Name" required autofocus>
+                  </div>
+                  <div class=form-group>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="inputPassword" class="form-control" name="password" ngModel class="form-control" placeholder="Password" required>
+                  </div>
+                  <div class=form-group> 
+                    <button [disabled]="isEnable" 
+                            class="btn btn-lg btn-primary btn-block" 
+                            type="submit" 
+                            ><span class="glyphicon glyphicon-log-in"></span> Sign in</button>                    
+                  </div>
+                  <div class=form-group> 
+                    <button [disabled]="isEnable" 
+                            class="btn btn-sm btn-danger btn-block"
+                            (click)="onForgort()"
+                            type="button" 
+                            ><span class="glyphicon glyphicon-flag"></span> Forgot Password</button>
+                    <span class="help-inline" *ngIf="isLogon">Something may have gone wrong</span>
+                    <span class="help-block" >{{message}}</span>
+                  </div>
+
+
+              </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+  </div>   
+  </div>
+</div>   
+     
+  <footer class="navbar-fixed-bottom">
+    <h5><a href="http://www.erpsystemmalaysia.com/">
+      <span> </span><span> </span><span class="glyphicon glyphicon-thumbs-up"></span> Powered by Wincom Solution Sdn Bhd.</a></h5>
+  </footer>
+ 
+

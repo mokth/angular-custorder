@@ -1,0 +1,23 @@
+.logo {
+  padding: 10px 10px 0 10px;
+}
+
+.name {
+  font-size: 14px;
+  color: #333;
+  padding-top: 15px;
+}
+.form {
+    margin: 20px auto;
+}
+.center-block {  
+  display: block;  
+  margin-right: auto;  
+  margin-left: auto;  
+}  
+.jumbotron {
+  background-color: white
+}
+.footer {
+  background-color:lightslategray
+}

@@ -1,0 +1,68 @@
+   <div class="row">
+          <div class="col-md-1 col-xs-hidding">
+        </div>
+        <div class="col-md-5 col-xs-12">
+            <h3><span class="col-xs-12 label label-default"
+                ><span class="glyphicon glyphicon-th-list"></span> ORDER LISTING</span></h3> 
+        </div>         
+  </div>
+    <div class="row">
+        <div class="col-md-1 col-xs-hidding">
+        </div>
+        <div class="col-md-10 col-xs-12">
+            <dx-data-grid
+                            id="gridContainer"
+                            [dataSource]="soheaders"
+                            [sorting]="{mode: 'single'}"
+                            [columns]="columns"
+                            [paging]="{ pageSize: 10 }"  
+                            [allowColumnResizing]="true"                            
+                            [columnMinWidth]="50"
+                            [columnAutoWidth]="true"                            
+                            >
+                <div *dxTemplate="let d of 'viewTemplate'"> 
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-xs btn-info"
+                            (click)="OnButViewClick(d.data.sono)"
+                            data-toggle="tooltip" title="View the Order."
+                            ><span class="glyphicon glyphicon-eye-open"></span> </button> 
+                        <button type="button" [disabled]="d.data.status !='NEW'" 
+                            class="btn btn-xs" [ngClass]="getbuttClass(d.data.status)"
+                            (click)="OnButEditClick(d.data.sono)"
+                            data-toggle="tooltip" title="Edit the Order."
+                            ><span class="glyphicon glyphicon-pencil"></span> </button> 
+                        <button [disabled]="d.data.status !='NEW'" 
+                            [ngClass]="getbuttClass2(d.data.status)"
+                            type="button" class="btn btn-xs"
+                            (click)="OnButCancelClick(d.data.sono)"
+                            data-toggle="tooltip" title="Cancel the Order."
+                            ><span class="glyphicon glyphicon-remove"></span> </button>      
+                    </div>
+                </div>
+                <!-- <div *dxTemplate="let d of 'editTemplate'"> 
+                                 
+                </div>
+                <div class="col-xs-12" *dxTemplate="let d of 'cancelTemplate'"> 
+                    
+                </div> -->
+                  <div *dxTemplate="let d of 'remarkTemplate'">
+                    <div class="wordwrap" >{{d.data.remark}}</div> 
+                </div>
+            </dx-data-grid>
+        </div>        
+        <div class="col-md-1 col-xs-hidding">
+        </div>
+    </div>
+    <br>
+     <div class="row">
+        <div class="col-md-1 col-xs-hidding">
+        </div>
+        <div class="col-md-2 col-xs-12">
+             <button type="button" 
+                    (click)="onCancel()" 
+                    class="btn btn-large btn-block btn-primary">
+                    <span class="glyphicon glyphicon-home"></span> HOME</button>   
+        </div>
+        <div *ngIf="message" class="col-md-6 col-xs-12 alert alert-warning" role="alert">{{message}}              
+        </div>
+      </div>

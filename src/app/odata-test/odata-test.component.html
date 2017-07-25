@@ -1,0 +1,28 @@
+<dx-data-grid id="gridContainer"
+        [dataSource]="dataSource"
+        [paging]="{ pageSize: 10 }"  
+        [sorting]="{mode: 'single'}"
+        [filterRow]= "{ visible: true }"
+        [searchPanel]= "{ visible: true }"
+        [allowColumnResizing]="true"    
+  >
+    <dxi-column
+        dataField="ICode"
+    ></dxi-column>
+    <dxi-column
+        dataField="IDesc"
+        [width]="200"
+    ></dxi-column>
+    <dxi-column
+        dataField="IType"        
+    ></dxi-column>
+     <dxi-column
+        dataField="IClass"        
+    ></dxi-column>
+   <dxi-column
+        dataField="StdUOM"        
+    ></dxi-column>
+    <dxi-column
+        dataField="DefWarehouse"         
+    ></dxi-column>
+</dx-data-grid>

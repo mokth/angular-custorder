@@ -1,0 +1,51 @@
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" 
+             data-toggle="collapse" 
+             data-target="#navbar" 
+             aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">MENU</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        <div> 
+          <a class="logo pull-left" href="http://www.erpsystemmalaysia.com/">
+              <img width="100" height="30" src="./assets/logo.png">            
+          </a>
+          <span class="name pull-left"><strong> {{fullname}}</strong></span>
+        </div>   
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">     
+        <ul class="nav navbar-nav navbar-right">
+          <!--<li routerLinkActive="active" ><a href="">COMPANY</a></li>-->
+          <li ><a routerLink="/order/NEWONE"><span class="glyphicon glyphicon-shopping-cart"></span> NEW ORDER</a></li>
+          <li ><a routerLink="/sohis"><span class="glyphicon glyphicon-list-alt"></span> ORDER LIST</a></li>
+          
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+               ><span class="glyphicon glyphicon-user"></span> USER<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li ><a routerLink="/profile"><span class="glyphicon glyphicon-info-sign"></span> PROFILE</a></li>
+                <li ><a routerLink="/change"><span class="glyphicon glyphicon-lock"></span> CHANGE PASSWORD</a></li>
+                <!-- <li ><a routerLink="/test"><span class="glyphicon glyphicon-lock"></span> TEST ODATA</a></li> -->
+             </ul>
+            </li>
+          <li><a routerLink="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+        </ul>        
+      </div>
+
+      <!--<ul class="dropdown-menu">
+          <li routerLinkActive="active"><a routerLink="/order/NEWONE">NEW ORDER</a></li>
+          <li routerLinkActive="active"><a routerLink="/sohis">ORDER LIST</a></li>
+          <li routerLinkActive="active"><a routerLink="/logout">Log Out</a></li>
+      </ul>-->
+    </div>   
+  </nav>
+  <footer class="navbar-fixed-bottom">
+    <h5><a href="http://www.erpsystemmalaysia.com/">
+      <span class="glyphicon glyphicon-thumbs-up"></span> Powered by Wincom Solution Sdn Bhd.</a></h5>
+  </footer>
+ 
+   
