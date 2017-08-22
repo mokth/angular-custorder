@@ -19,6 +19,7 @@
                             [searchPanel]= "{ visible: true }"
                             [allowColumnResizing]="true"            
                             [columnMinWidth]="50"
+                            [rowAlternationEnabled]="true"
                             [columnAutoWidth]="true"
                             (onRowUpdated)="onRowUpdated($event)" 
                             (onEditingStart)="onEditingStart($event)"
@@ -79,6 +80,7 @@
                 [dataSource]="orderitems"
                 [sorting]="{mode: 'single'}"    
                 [columns]="columns2"
+                [rowAlternationEnabled]="true"
                 [paging]="{ pageSize: 40 }"   
                 >
             <div *dxTemplate="let d of 'viewTemplate'"> 

@@ -8,6 +8,7 @@ import { ShipAddr } from "app/entities/shipp-addr";
 import { CanComponentDeactivate } from "app/canDeactivateGuard";
 import { SalesOrder } from "app/entities/sales-order";
 import { AuthserviceService } from "app/authservice.service";
+import { CustSOItem } from "app/entities/so-items";
 
 @Component({
   selector: 'app-confirm-order',
@@ -70,7 +71,7 @@ export class ConfirmOrderComponent implements OnInit,CanComponentDeactivate {
       );
   
      
-    console.log(this.remark);
+    //console.log(this.remark);
     var count=0;
     for( var itm in psjons){
          let obj= psjons[count];
@@ -117,14 +118,37 @@ export class ConfirmOrderComponent implements OnInit,CanComponentDeactivate {
     this.salesorder.items= this.orderitems;
     this.salesorder.shipaddr = this.shipaddr;
     this.salesorder.remark=this.remark;
+    this.salesorder.custcode =  this.auth.getUserID();
+    this.salesorder.agent =this.salesorder.custcode;
+    this.salesorder.custname = this.shipaddr.name;
+    this.salesorder.pono ='';
     this.salesorder.mode="NEW";
     this.salesorder.salesOrderNo=this.sono;    
     this.salesorder.date=  today.getFullYear() + "-" +
                             (today.getMonth() + 1) + "-" +
                             today.getDate();
+    var line=1;
+    var soitems:CustSOItem[]=[];
+    this.orderitems.forEach(itm => {
+       let soitem = new CustSOItem();
+       soitem.amt= itm.amt;
+       soitem.deldate = itm.deldate;
+       soitem.icode= itm.icode;
+       soitem.idesc= itm.idesc;
+       soitem.inclusice = false;
+       soitem.line =line;
+       soitem.note = itm.note;
+       soitem.price = itm.price;
+       soitem.qty = itm.qty;
+       soitem.taxamt = itm.taxamt;
+       soitem.taxgrp = itm.tax;
+       soitem.uom = itm.uom;
+       soitem.sono = this.sono;
+       soitems.push(soitem);
+    });
+    this.salesorder.soitems = soitems;
+    console.log(this.salesorder);
     this.postSalesOrder();
-    //console.log(JSON.stringify(this.salesorder));
-
   }
   
   postSalesOrder() {
@@ -153,9 +177,7 @@ export class ConfirmOrderComponent implements OnInit,CanComponentDeactivate {
         (err)=>{
           this.message ="Fail to submit Sales Order."+err
         },
-        
-      )
-   
+      )   
   }  
   
   resetData(){

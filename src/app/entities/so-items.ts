@@ -12,6 +12,6 @@ export class CustSOItem{
         public taxgrp :string;
         public inclusice :boolean;
         public deldate :Date;
-        public note :string;  
+        public note :string;
  constructor(){}              
  }

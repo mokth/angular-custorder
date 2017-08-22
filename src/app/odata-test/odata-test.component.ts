@@ -16,7 +16,7 @@ export class OdataTestComponent implements OnInit {
     this.dataSource = {
             store: {
                 type: 'odata',
-                url: 'http://localhost:23645/api/vgridIvMa',
+                url: 'http://localhost:5000/api/ItemMaster',
                 version:4
             }
         }

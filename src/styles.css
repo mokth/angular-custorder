@@ -35,4 +35,7 @@
   -webkit-justify-content : center;
           justify-content : center;
 }
+.dx-datagrid .dx-row-alt > td  {
+      background-color: #D0E1B8;
+ }
 
