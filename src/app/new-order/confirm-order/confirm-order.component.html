@@ -58,8 +58,7 @@
                       column="amt"
                       summaryType="sum"
                       displayFormat="{0}"
-                      valueFormat="decimal"
-                      format="fixedPoint" 
+                      valueFormat="fixedPoint"                      
                       precision="2" 
                       >
                   </dxi-total-item>
@@ -67,8 +66,7 @@
                       column="taxamt"
                       summaryType="sum"
                       displayFormat="{0}"
-                      valueFormat="decimal"
-                      format="fixedPoint" 
+                      valueFormat="fixedPoint"                      
                       precision="2" 
                       >
                   </dxi-total-item>
@@ -76,6 +74,8 @@
                       column="qty"
                       displayFormat="{0}"
                       summaryType="sum"
+                      valueFormat="fixedPoint"                      
+                      precision="2" 
                       >
                   </dxi-total-item>
                   <dxi-total-item
@@ -107,9 +107,9 @@
              </div>        
            </div>
           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-             <h4 class="text-right">{{ttltax.toFixed(2)}}</h4>
-             <h4 class="text-right">{{ttlamt.toFixed(2)}}</h4>
-             <h4 class="text-right">{{netamt.toFixed(2)}}</h4>
+             <h4 class="text-right">{{ttltax | number:'1.2-2'}}</h4>
+             <h4 class="text-right">{{ttlamt | number:'1.2-2'}}</h4>
+             <h4 class="text-right">{{netamt | number:'1.2-2'}}</h4>
           </div>
       </div>
       <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">

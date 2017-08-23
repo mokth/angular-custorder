@@ -303,7 +303,10 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
   }
 
   getImageUrl(path: string) {
-    return path.replace('~', 'http://www.wincom2cloud.com/erpv4');
+    console.log(path);
+    let newpath = path.replace('~', 'http://www.wincom2cloud.com/erpv4');
+    console.log(newpath);
+    return newpath;// path.replace('~', 'http://www.wincom2cloud.com/erpv4');
   }
 
   onValueChanged(evt: any, data: any): void {
