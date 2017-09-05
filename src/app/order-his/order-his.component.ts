@@ -23,6 +23,7 @@ export class OrderHisComponent implements OnInit {
   shipaddr:ShipAddr;
   remark:string=""; 
   sono:string;
+  pono:string;
   message:string;
   editmode:string;
 
@@ -33,6 +34,7 @@ export class OrderHisComponent implements OnInit {
         { dataField: 'sodate', caption: 'DATE', dataType: 'date',
               format: 'dd/MM/yyyy',allowEditing: false,sortIndex: 0, sortOrder: 'desc'  },
         { dataField: 'sono', caption: 'SO NO',allowEditing: false },
+        { dataField: 'pono', caption: 'PO NO',allowEditing: false },
         { dataField: 'status', caption: 'STATUS',allowEditing: false },
         { dataField: 'taxamt', caption: 'TAX',dataType: 'number',format: 'fixedPoint', precision: 2 ,allowEditing: false  },
         { dataField: 'amt', caption: 'AMOUNT',dataType: 'number',format: 'fixedPoint', precision: 2,allowEditing: false   },
@@ -158,8 +160,8 @@ export class OrderHisComponent implements OnInit {
          this.shipaddr= new ShipAddr(this.auth.getUserID(),x.shipname,x.addr1,
          x.addr2,x.addr3,x.addr4,x.state,x.city,x.postal,x.country);
          this.remark=x.remark;
+         this.pono = x.pono;
        })
-
    }
 
    viewEditOrder(){
@@ -167,32 +169,32 @@ export class OrderHisComponent implements OnInit {
        localStorage.setItem('_shipaddr',JSON.stringify(this.shipaddr));
        localStorage.setItem('_remark',JSON.stringify(this.remark));
        localStorage.setItem('_sono',JSON.stringify(this.sono));
+       localStorage.setItem('_pono',JSON.stringify(this.pono));
        this.router.navigate(['/order/'+this.editmode]);
    }
    
    onCancel(){
       this.clearStorage();
-      this.router.navigate(['/main']);    
+      this.router.navigate(['/main']);
    }
 
    clearStorage(){
       localStorage.removeItem('_order');
       localStorage.removeItem('_shipaddr');
       localStorage.removeItem('_remark');
-      localStorage.removeItem('_sono');      
+      localStorage.removeItem('_sono');
+      localStorage.removeItem('_pono');
    }
 
    getbuttClass(status){
      if (status=='NEW'){
        return "btn-warning";
      }else  return "btn-default";
-      
    }
     getbuttClass2(status){
      if (status=='NEW'){
        return "btn-danger";
      }else  return "btn-default";
-      
    }
 
    downloadFile(data): void {

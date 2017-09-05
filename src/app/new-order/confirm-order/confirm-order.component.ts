@@ -19,10 +19,11 @@ export class ConfirmOrderComponent implements OnInit,CanComponentDeactivate {
   salesorder: SalesOrder;
   orderitems:Custitem[]=[];
   shipaddr:ShipAddr;
-  ttltax:number=0;
-  netamt:number=0;
-  ttlamt:number=0;
-  remark:string;
+  ttltax: number = 0;
+  netamt: number = 0;
+  ttlamt: number = 0;
+  remark: string;
+  pono:string;
   message:string;
   sucessSubmit:boolean=false;
   editmode:string;
@@ -56,6 +57,8 @@ export class ConfirmOrderComponent implements OnInit,CanComponentDeactivate {
     var psjons2 = JSON.parse(token2);    
     let token3= localStorage.getItem('_remark');
     this.remark = JSON.parse(token3); 
+    let token4= localStorage.getItem('_pono');
+    this.pono = JSON.parse(token4); 
      this.route.params
       .subscribe(
         (params: Params) => {
@@ -80,7 +83,7 @@ export class ConfirmOrderComponent implements OnInit,CanComponentDeactivate {
          let item = new Custitem(
                   obj.uid,obj.icode,obj.idesc,obj.custcode,obj.uom,obj.defuom,obj.image,obj.tax,
                   obj.price,obj.psize,obj.qty,obj.amt,obj.taxamt,obj.taxper,obj.deldate,obj.note);
-         this.orderitems.push(item);                    
+         this.orderitems.push(item);
      
     }
     this.shipaddr = new ShipAddr(psjons2.custcode,psjons2.name,
@@ -121,7 +124,7 @@ export class ConfirmOrderComponent implements OnInit,CanComponentDeactivate {
     this.salesorder.custcode =  this.auth.getUserID();
     this.salesorder.agent =this.salesorder.custcode;
     this.salesorder.custname = this.shipaddr.name;
-    this.salesorder.pono ='';
+    this.salesorder.pono =this.pono;
     this.salesorder.mode="NEW";
     this.salesorder.salesOrderNo=this.sono;    
     this.salesorder.date=  today.getFullYear() + "-" +
@@ -146,8 +149,7 @@ export class ConfirmOrderComponent implements OnInit,CanComponentDeactivate {
        soitem.sono = this.sono;
        soitems.push(soitem);
     });
-    this.salesorder.soitems = soitems;
-    console.log(this.salesorder);
+    this.salesorder.soitems = soitems;    
     this.postSalesOrder();
   }
   
@@ -183,7 +185,8 @@ export class ConfirmOrderComponent implements OnInit,CanComponentDeactivate {
   resetData(){
       localStorage.removeItem('_order');
       localStorage.removeItem('_shipaddr');
-      localStorage.removeItem('_remark');   
+      localStorage.removeItem('_remark'); 
+      localStorage.removeItem('_pono'); 
       this.salesorder=null;
       this.orderitems=[];
       this.shipaddr.addr1="";
@@ -197,10 +200,11 @@ export class ConfirmOrderComponent implements OnInit,CanComponentDeactivate {
       this.ttltax=0;
       this.netamt=0;
       this.ttlamt=0;
-      this.remark="";       
+      this.remark="";
+      this.pono="";
   }
 
   canDeactivate(): boolean | Observable<boolean> | Promise<boolean>{
-        return true;    
+    return true;
   };
 }

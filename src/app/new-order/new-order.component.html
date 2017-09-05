@@ -1,4 +1,5 @@
 <!-- onerror="this.onerror=null;this.src='http://www.wincom2cloud.com/erpv4/Inventory/Image/noimage.png';"/> -->
+<form class="form" [formGroup]="rform">     
 <div class="row">
         <div class="col-md-12 col-sm12 col-xs-12">
             <h3><span class="col-lg-7 col-md-7 col-sm12 col-xs-12 label label-default"
@@ -75,6 +76,17 @@
         <div class="row">
           <div class="col-md-12 col-sm12 col-xs-12">
             <h4><span class="glyphicon glyphicon-shopping-cart"></span> ORDER LIST</h4>
+            <div class="row">
+               <div class="col-md-2 col-sm3 col-xs-2">
+                    <label class="lable-sm" >PO NO</label>
+               </div>
+               <div class="col-md-4 col-sm4col-xs-4">
+                <div class="form-group">     
+                    <input type="text" id="pono" name="pono"  class="form-control input-sm"                     
+                        formControlName="pono" placeholder="Purchase Order No." >    
+                </div>
+               </div>
+            </div>
             <dx-data-grid
                 id="gridContainer"               
                 [dataSource]="orderitems"
@@ -163,7 +175,7 @@
         </div> <!--row 2-->
        
         <div class="row" *ngIf="showAddr">  
-           <form class="form" [formGroup]="rform">        
+             
             <div class="col-md-10 col-sm-12 col-sx-12">
                 <div class="form-group"> 
                         <label for="addr1"><span class="glyphicon glyphicon-envelope"></span> SHIP TO THIS ADDRESS:</label>    
@@ -222,7 +234,8 @@
                 </div>           
                                 
             </div>
-           </form> 
+           
         </div> <!--row 3-->
     </div> <!--col-xs-5-->
  </div>
+</form> 

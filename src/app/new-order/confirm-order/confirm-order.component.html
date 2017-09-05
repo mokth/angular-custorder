@@ -1,145 +1,110 @@
-    <div class="row">
-        <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
-        </div>
-        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-            <h3><span class="col-lg-7 col-md-7 col-sm-12 col-xs-12 label label-default"
-                ><span class="glyphicon glyphicon-check"></span> {{title}}</span></h3> 
-            <h3><span class="col-lg-2 col-md-2 col-sm-12 col-xs-12 label label-success"
-                ><span class="glyphicon glyphicon-pencil" *ngIf="editmode=='EDIT'"></span>
-                <span class="glyphicon glyphicon-plus" *ngIf="editmode=='NEW'"></span>
-                 {{editmode}}</span></h3> 
-        </div>
-        
-         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-        </div>
-    </div>
+<div class="row">
+  <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
+  </div>
+  <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+    <h3><span class="col-lg-7 col-md-7 col-sm-12 col-xs-12 label label-default"><span class="glyphicon glyphicon-check"></span>      {{title}}</span>
+    </h3>
+    <h3><span class="col-lg-2 col-md-2 col-sm-12 col-xs-12 label label-success"><span class="glyphicon glyphicon-pencil" *ngIf="editmode=='EDIT'"></span>
+      <span class="glyphicon glyphicon-plus" *ngIf="editmode=='NEW'"></span> {{editmode}}
+      </span>
+    </h3>
+  </div>
 
-    <div class="row">
-        <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
-        </div>
-        <div class="col-lg-5 col-col-md-5 col-sm-12 col-xs-12">
-            <h6>SHIP TO :</h6>
-            <h5>{{shipaddr.name}}</h5>
-            <h5>{{shipaddr.addr1}}</h5>
-            <h5>{{shipaddr.addr2}}</h5>
-            <h5>{{shipaddr.addr3}}</h5>
-            <h5>{{shipaddr.addr4}}</h5>        
-        </div>
-         <div class="col-lg-5 col-col-md-5 col-sm-12 col-xs-12">
-            <h6>REMARK :</h6>
-            <h5>{{remark}}</h5>            
-        </div>
-         <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
-        </div>
-    </div>
+  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
+  </div>
+  <div class="col-lg-5 col-col-md-5 col-sm-12 col-xs-12">
+    <h6>SHIP TO :</h6>
+    <h5>{{shipaddr.name}}</h5>
+    <h5>{{shipaddr.addr1}}</h5>
+    <h5>{{shipaddr.addr2}}</h5>
+    <h5>{{shipaddr.addr3}}</h5>
+    <h5>{{shipaddr.addr4}}</h5>
+  </div>
+  <div class="col-lg-5 col-col-md-5 col-sm-12 col-xs-12">
     <div class="row">
-        <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
-        </div>
-        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
-                <dx-data-grid
-                  id="gridContainer"
-                  [dataSource]="orderitems"
-                  [sorting]="{mode: 'single'}"              
-                  [columns]="columns"
-                  [paging]="{ pageSize: 20 }"
-                  [allowColumnResizing]="true"                  
-                  [columnMinWidth]="50"
-                  [columnAutoWidth]="true"
-                  [rowAlternationEnabled]="true"
-                  >
-                  <div *dxTemplate="let d of 'remTemplate'">
-                        <div class="row">
-                            <div class="col-sx-12 wordwrap">{{d.data.note}}</div>
-                        </div>
-                  </div>
-                  <dxo-summary>
-                  <dxi-total-item
-                      column="amt"
-                      summaryType="sum"
-                      displayFormat="{0}"
-                      valueFormat="fixedPoint"                      
-                      precision="2" 
-                      >
-                  </dxi-total-item>
-                  <dxi-total-item
-                      column="taxamt"
-                      summaryType="sum"
-                      displayFormat="{0}"
-                      valueFormat="fixedPoint"                      
-                      precision="2" 
-                      >
-                  </dxi-total-item>
-                  <dxi-total-item
-                      column="qty"
-                      displayFormat="{0}"
-                      summaryType="sum"
-                      valueFormat="fixedPoint"                      
-                      precision="2" 
-                      >
-                  </dxi-total-item>
-                  <dxi-total-item
-                      column="image"
-                      displayFormat="TOTAL"
-                      summaryType="max"                  
-                      >
-                  </dxi-total-item>
-                </dxo-summary>
-              </dx-data-grid>
-        </div>
-    </div> 
-    <div class="row">
-      <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <span class="help-block">Don't know how I got to this question, but even if it's many years since this has been asked, I would like to add a quick and simple method I follow and has never let me down:</span>
-      </div>
-      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-          <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
-              <div class="row">
-              <h4><span class="col-xs-10 label label-default"> TAX AMOUNT</span></h4>
-              </div>   
-              <div class="row">
-              <h4><span class="col-xs-10 label label-default"> AMOUNT</span></h4>
-               </div>   
-              <div class="row">
-              <h4><span class="col-xs-10 label label-default"> TOTAL AMOUNT</span></h4>  
-             </div>        
-           </div>
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-             <h4 class="text-right">{{ttltax | number:'1.2-2'}}</h4>
-             <h4 class="text-right">{{ttlamt | number:'1.2-2'}}</h4>
-             <h4 class="text-right">{{netamt | number:'1.2-2'}}</h4>
-          </div>
-      </div>
-      <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
-      </div>
-    </div>  
-    <div class="row">
-      <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden"></div>
-      <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
-          <button type="button" 
-                    [disabled]="sucessSubmit"
-                    class="btn btn-large btn-block btn-success"
-                    (click)="onConfirm()"
-                    ><span class="glyphicon glyphicon-save"></span> SUBMIT</button>   
-      </div>
-      <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
-          <button type="button" 
-                    class="btn btn-large btn-block btn-warning"
-                    (click)="onBack()"
-                    ><span class="glyphicon glyphicon-remove"></span> BACK</button>   
+      <div class="col-lg-12 col-col-md-12 col-sm-12 col-xs-12">
+        <h5>PO NO : {{pono}}</h5>        
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden"></div>
-      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-          <h4 >{{message}}</h4>
+      <div class="col-lg-12 col-col-md-12 col-sm-12 col-xs-12">
+        <h5>REMARK :</h5>
+        <h5>{{remark}}</h5>
       </div>
     </div>
+  </div>
+  <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
+  </div>
+</div>
 
-   
-
-
-
-
+<div class="row">
+  <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
+  </div>
+  <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+    <dx-data-grid id="gridContainer" [dataSource]="orderitems" [sorting]="{mode: 'single'}" [columns]="columns" [paging]="{ pageSize: 20 }"
+      [allowColumnResizing]="true" [columnMinWidth]="50" [columnAutoWidth]="true" [rowAlternationEnabled]="true">
+      <div *dxTemplate="let d of 'remTemplate'">
+        <div class="row">
+          <div class="col-sx-12 wordwrap">{{d.data.note}}</div>
+        </div>
+      </div>
+      <dxo-summary>
+        <dxi-total-item column="amt" summaryType="sum" displayFormat="{0}" valueFormat="fixedPoint" precision="2">
+        </dxi-total-item>
+        <dxi-total-item column="taxamt" summaryType="sum" displayFormat="{0}" valueFormat="fixedPoint" precision="2">
+        </dxi-total-item>
+        <dxi-total-item column="qty" displayFormat="{0}" summaryType="sum" valueFormat="fixedPoint" precision="2">
+        </dxi-total-item>
+        <dxi-total-item column="image" displayFormat="TOTAL" summaryType="max">
+        </dxi-total-item>
+      </dxo-summary>
+    </dx-data-grid>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <span class="help-block">Don't know how I got to this question, but even if it's many years since this has been asked, I would like to add a quick and simple method I follow and has never let me down:</span>
+  </div>
+  <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+    <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
+      <div class="row">
+        <h4><span class="col-xs-10 label label-default"> TAX AMOUNT</span></h4>
+      </div>
+      <div class="row">
+        <h4><span class="col-xs-10 label label-default"> AMOUNT</span></h4>
+      </div>
+      <div class="row">
+        <h4><span class="col-xs-10 label label-default"> TOTAL AMOUNT</span></h4>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+      <h4 class="text-right">{{ttltax | number:'1.2-2'}}</h4>
+      <h4 class="text-right">{{ttlamt | number:'1.2-2'}}</h4>
+      <h4 class="text-right">{{netamt | number:'1.2-2'}}</h4>
+    </div>
+  </div>
+  <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden"></div>
+  <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
+    <button type="button" [disabled]="sucessSubmit" class="btn btn-large btn-block btn-success" (click)="onConfirm()"><span class="glyphicon glyphicon-save"></span> SUBMIT</button>
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
+    <button type="button" class="btn btn-large btn-block btn-warning" (click)="onBack()"><span class="glyphicon glyphicon-remove"></span> BACK</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden"></div>
+  <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+    <h4>{{message}}</h4>
+  </div>
+</div>

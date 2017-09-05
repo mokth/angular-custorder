@@ -16,6 +16,7 @@ export class CustSOHeader {
         public postal :string;
         public country :string;
         public remark :string;
+        public pono :string;
         public amt :number;
         public taxamt :number;
   constructor(){}

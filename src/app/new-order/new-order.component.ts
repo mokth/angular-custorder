@@ -25,6 +25,7 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
   showAddr: boolean = false;
   changesSaved: boolean = false;
   remark: string = "";
+  pono: string = "";
   editmode: string = 'NEW';
   title: string;
   columns = [
@@ -88,11 +89,10 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
       city: new FormControl(null, null),
       state: new FormControl(null, null),
       postal: new FormControl(null, null),
-      remark: new FormControl(null, null)
+      remark: new FormControl(null, null),
+      pono: new FormControl(null, Validators.required),
     });
-
     this.getCustItems();
-
   }
 
   onToolbarPreparing(e) {
@@ -116,6 +116,9 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
     var psjons2 = JSON.parse(token2);
     let token3 = localStorage.getItem('_remark');
     this.remark = JSON.parse(token3);
+    let token4 = localStorage.getItem('_pono');
+    this.pono = JSON.parse(token4);
+    this.rform.get('pono').setValue(this.pono);
     if (this.editmode == "EDIT") {
       let token = localStorage.getItem('_sono');
       this.title = "EDIT SALES ORDER [ " + JSON.parse(token) + " ]";
@@ -124,12 +127,10 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
     for (var itm in psjons) {
       let obj = psjons[count];
       count = count + 1;
-      //console.log(obj);
       let item = new Custitem(
         obj.uid, obj.icode, obj.idesc, obj.custcode, obj.uom, obj.defuom, obj.image, obj.tax,
         obj.price, obj.psize, obj.qty, obj.amt, obj.taxamt, obj.taxper, obj.deldate, obj.note);
       this.orderitems.push(item);
-
     }
     this.shipaddr = new ShipAddr(psjons2.custcode, psjons2.name,
       psjons2.addr1, psjons2.addr2,
@@ -275,6 +276,7 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
     localStorage.removeItem('_shipaddr');
     localStorage.removeItem('_remark');
     localStorage.removeItem('_sono');
+    localStorage.removeItem('_pono');
   }
 
   OnProcessNext() {
@@ -288,9 +290,12 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
     this.shipaddr.state = this.rform.get('state').value;
     this.shipaddr.city = this.rform.get('city').value;
     this.remark = this.rform.get('remark').value;
+    this.pono = this.rform.get('pono').value;
+    
     localStorage.setItem('_order', JSON.stringify(this.orderitems));
     localStorage.setItem('_shipaddr', JSON.stringify(this.shipaddr));
     localStorage.setItem('_remark', JSON.stringify(this.remark));
+    localStorage.setItem('_pono', JSON.stringify(this.pono));
     this.changesSaved = true;
     this.router.navigate(['confirm/' + this.editmode]);
     //this.router.navigate(['confirm'], {relativeTo: this.route});
