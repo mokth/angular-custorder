@@ -29,6 +29,20 @@
           text-align: center;
           transform: translate(0, -50%);
 }
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.bg {
+  height: 100%;
+  width:  100%;
+  background-image: url(./assets/background.jpg) ;
+  background-position: center;
+  
+  background-size:cover; 
+}
+
   </style>
   <base href="/">
 
@@ -38,7 +52,9 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+  <div class="bg">
   <app-root></app-root> 
+</div> 
   <div class="loading">
     <h1>Loading...</h1>
     <svg width="400" height="180" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

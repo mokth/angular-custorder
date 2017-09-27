@@ -29,21 +29,20 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
   editmode: string = 'NEW';
   title: string;
   columns = [
-    { dataField: 'icode', caption: 'ITEM', allowEditing: false, sortIndex: 0, sortOrder: 'asc' },
-    {
-      dataField: 'idesc', caption: 'DESCRIPTION', cellTemplate: 'infoTemplate',
-      allowEditing: false, allowFiltering: false
+    { dataField: 'icode', caption: 'ITEM', allowEditing: false, sortIndex: 0, sortOrder: 'asc', width:"22%" },
+    { dataField: 'idesc', caption: 'DESCRIPTION', cellTemplate: 'infoTemplate', 
+      allowEditing: false, allowFiltering: false, width:"38%"
     },
     {
-      dataField: 'qty', caption: 'ORDER QTY', dataType: 'number', width: 120,
-      editorOptions: {
-        showSpinButtons: true,
-        useLargeSpinButtons: false,
-        min: 0, height: 60
-      }, allowFiltering: false
-    },
-    { dataField: 'deldate', caption: 'DELIVER', dataType: 'date', format: 'dd/MM/yyyy', allowFiltering: false },
-    { dataField: 'note', caption: 'NOTE', cellTemplate: 'remTemplate', editCellTemplate: 'dataCellTemplate', allowFiltering: false }
+       dataField: 'qty', caption: 'ORDER QTY', dataType: 'number', width:"10%",
+       editorOptions: {
+         showSpinButtons: true,
+         useLargeSpinButtons: false,
+         min: 0, height: 60
+       }, allowFiltering: false
+     },
+     { dataField: 'deldate', caption: 'DELIVER', dataType: 'date', format: 'dd/MM/yyyy', allowFiltering: false, width:"13%" },
+     { dataField: 'note', caption: 'NOTE', cellTemplate: 'remTemplate', editCellTemplate: 'dataCellTemplate', allowFiltering: false, width:"15%" }
 
   ];
   columns2 = [
@@ -318,7 +317,7 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
     console.log(data);
     data.setValue(evt.value);
   }
-
+ 
   OnButDeleteClick(uid) {
     var index = this.orderitems.findIndex(x => x.uid == uid);
     var index2 = this.custitems.findIndex(x => x.uid == uid);

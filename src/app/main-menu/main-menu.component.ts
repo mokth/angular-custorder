@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 
 import { AuthserviceService } from "app/authservice.service";
 
+
+
 @Component({
   selector: 'app-main-menu',
   templateUrl: './main-menu.component.html',
@@ -11,10 +13,12 @@ import { AuthserviceService } from "app/authservice.service";
 export class MainMenuComponent implements OnInit {
   fullname:string;
   isopen:boolean=false;
-  constructor(private auth:AuthserviceService,private router: Router) { }
+  constructor(private auth:AuthserviceService,
+              private router: Router) { }
 
   ngOnInit() {
-     
+     //this.win.nativeWindow.document.getElementById("carousel-logo").click();
+     jQuery('#leftClick').trigger('click');
      this.fullname= this.auth.getUserFullname();
   }
  onLogout() {

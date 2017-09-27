@@ -1,7 +1,12 @@
 .logo {
-  padding: 10px 10px 0 10px;
+  padding: 0;
+  /* background-color: #566573 ; */
 }
-
+.title {
+  font-size: 1.6em !important;
+  padding-left: 15px;
+  font-weight: bold;
+}
 .name {
   font-size: 14px;
   color: #333;
@@ -13,10 +18,16 @@
 .center-block {  
   display: block;  
   margin-right: auto;  
-  margin-left: auto;  
+  margin-left: auto;
+  margin-top: 15%;
+  margin-bottom: 10%;  
 }  
 .jumbotron {
-  background-color: white
+  background-color: white;
+  background-image: url("../../assets/background.jpg") ;
+  background-position: center;
+  
+  background-size:cover; 
 }
 .footer {
   background-color:lightslategray

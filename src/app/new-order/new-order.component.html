@@ -1,241 +1,199 @@
 <!-- onerror="this.onerror=null;this.src='http://www.wincom2cloud.com/erpv4/Inventory/Image/noimage.png';"/> -->
-<form class="form" [formGroup]="rform">     
 <div class="row">
+  <div class="col-md-12 col-sm12 col-xs-12">
+    <form class="form" [formGroup]="rform">
+      <div class="row">
         <div class="col-md-12 col-sm12 col-xs-12">
-            <h3><span class="col-lg-7 col-md-7 col-sm12 col-xs-12 label label-default"
-                ><span class="glyphicon glyphicon-list-alt"></span> {{title}}</span></h3> 
-        </div>         
-  </div>
- <div class="row">
-    <div class="col-lg-7 col-md-7 col-sm12 col-xs-12">  
-        
-     <dx-data-grid
-                            id="gridContainer"
-                            [dataSource]="custitems"
-                            [sorting]="{mode: 'single'}"
-                            [editing]="{ mode: 'batch',allowUpdating: true }"
-                            [columns]="columns"
-                            [paging]="{ pageSize: 5 }"  
-                            [filterRow]= "{ visible: true }"
-                            [searchPanel]= "{ visible: true }"
-                            [allowColumnResizing]="true"            
-                            [columnMinWidth]="50"
-                            [rowAlternationEnabled]="true"
-                            [columnAutoWidth]="true"
-                            (onRowUpdated)="onRowUpdated($event)" 
-                            (onEditingStart)="onEditingStart($event)"
-                            (onToolbarPreparing)="onToolbarPreparing($event)"
-                            >
-                             <div *dxTemplate="let data of 'buttSaveGroup'">
-                                  <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-success"
-                                                    data-toggle="tooltip" title="Add to Order List."
-                                                    (click)="AddToOrder()"
-                                                    ><span class="glyphicon glyphicon-shopping-cart"></span> ADD TO ORDER LIST </button>             
-                                        <button type="button" class="btn btn-sm btn-danger"
-                                                    data-toggle="tooltip" title="Add to Order List."
-                                                    (click)="CancelOrder()"
-                                                    ><span class="glyphicon glyphicon-remove"></span> DISCHARGE CHANGES</button> 
-                                    </div>
-                            </div>
-                            <div *dxTemplate="let d of 'infoTemplate'">
-                                        <div class="row">
-                                            <div class="col-xs-12 wordwrap">{{d.data.idesc}}</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-12">PRICE : {{d.data.price}} {{d.data.uom}}</div>
-                                        </div>                        
-                                        <div class="row">
-                                            <div class="col-xs-12">P/SIZE : {{d.data.psize}} {{d.data.defuom}}</div>
-                                        </div>
-                                        <div class="row">
-                                        <div class="col-xs-12">
-                                            <img [src]="getImageUrl(d.data.image)" 
-                                            onerror="this.onerror=null;this.src='http://www.wincom2cloud.com/erpv4/Inventory/Image/noimage.png';"/>                                           
-                                        </div>
-                                        </div>
-                            </div>
-                            <div *dxTemplate="let data of 'dataCellTemplate'">
-                                <dx-text-area
-                                [autoResizeEnabled]="true"
-                                [value]="data.value"
-                                (onValueChanged)="onValueChanged($event, data)">
-                                ></dx-text-area>
-                            </div> 
-                            <div *dxTemplate="let d of 'remTemplate'">
-                                        <div class="row">
-                                            <div class="col-sx-12 wordwrap">{{d.data.note}}</div>
-                                        </div>
-                                </div>
-                    </dx-data-grid>
-            
-        
-    </div>
-    
-    <div class="col-lg-5 col-md-5 col-sm12 col-xs-12">  
-        <div class="row">
-          <div class="col-md-12 col-sm12 col-xs-12">
-            <h4><span class="glyphicon glyphicon-shopping-cart"></span> ORDER LIST</h4>
-            <div class="row">
-               <div class="col-md-2 col-sm3 col-xs-2">
-                    <label class="lable-sm" >PO NO</label>
-               </div>
-               <div class="col-md-4 col-sm4col-xs-4">
-                <div class="form-group">     
-                    <input type="text" id="pono" name="pono"  class="form-control input-sm"                     
-                        formControlName="pono" placeholder="Purchase Order No." >    
+          <h3><span class="col-lg-7 col-md-7 col-sm12 col-xs-12 label label-default"><span class="glyphicon glyphicon-list-alt"></span>            {{title}}</span>
+          </h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-7 col-md-7 col-sm12 col-xs-12">
+          <dx-data-grid id="gridContainer" 
+            [dataSource]="custitems" 
+            [sorting]="{mode: 'single'}" 
+            [editing]="{ mode: 'batch',allowUpdating: true }"
+            [columns]="columns" 
+            [paging]="{ pageSize: 5 }" 
+            [filterRow]="{ visible: true }" 
+            [searchPanel]="{ visible: true }"
+            [allowColumnResizing]="true" 
+            [columnMinWidth]="50" 
+            [rowAlternationEnabled]="true" 
+            [columnAutoWidth]="true"
+            (onRowUpdated)="onRowUpdated($event)"
+            (onEditingStart)="onEditingStart($event)" 
+            (onToolbarPreparing)="onToolbarPreparing($event)">
+            <div *dxTemplate="let data of 'buttSaveGroup'">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-success" data-toggle="tooltip" title="Add to Order List." (click)="AddToOrder()"><span class="glyphicon glyphicon-shopping-cart"></span> ADD TO ORDER LIST </button>
+                <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Add to Order List." (click)="CancelOrder()"><span class="glyphicon glyphicon-remove"></span> DISCHARGE CHANGES</button>
+              </div>
+            </div>
+            <div *dxTemplate="let d of 'infoTemplate'">
+              <div class="row">
+                <div class="col-xs-12 wordwrap">{{d.data.idesc}}</div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">PRICE : {{d.data.price}} {{d.data.uom}}</div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">P/SIZE : {{d.data.psize}} {{d.data.defuom}}</div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <img [src]="getImageUrl(d.data.image)" onerror="this.onerror=null;this.src='http://www.wincom2cloud.com/erpv4/Inventory/Image/noimage.png';"
+                  />
                 </div>
-               </div>
+              </div>
             </div>
-            <dx-data-grid
-                id="gridContainer"               
-                [dataSource]="orderitems"
-                [sorting]="{mode: 'single'}"    
-                [columns]="columns2"
-                [rowAlternationEnabled]="true"
-                [paging]="{ pageSize: 40 }"   
-                >
-            <div *dxTemplate="let d of 'viewTemplate'"> 
-                    <div class="btn-group">
-                        <button 
-                            type="button" class="btn btn-xs btn-danger"
-                            (click)="OnButDeleteClick(d.data.uid)"
-                            data-toggle="tooltip" title="Delete the Order."
-                            ><span class="glyphicon glyphicon-remove"></span> </button>      
-                    </div>
+            <div *dxTemplate="let data of 'dataCellTemplate'">
+              <dx-text-area [autoResizeEnabled]="true" [value]="data.value" (onValueChanged)="onValueChanged($event, data)">
+                ></dx-text-area>
             </div>
-            <div *dxTemplate="let d of 'infoTemplate2'">
-                    <table>
+            <div *dxTemplate="let d of 'remTemplate'">
+              <div class="row">
+                <div class="col-sx-12 wordwrap">{{d.data.note}}</div>
+              </div>
+            </div>
+            <div *dxTemplate="let d of 'editTemplate'">
+                <div class="row">
+                  <input type="number" [value]="d.data.qty"  (onValueChanged)="onValueChanged($event, d.data.qty)">
+                </div>
+                <div class="row">
+                    <input type="date" [value]="d.data.deldate"  (onValueChanged)="onValueChanged($event, d.data.deldate)">
+                </div>
+                <!-- <div class="row">
+                    <dx-text-area [autoResizeEnabled]="true" [value]="d.data.note.value" (onValueChanged)="onValueChanged($event, d.data.note)">
+                        ></dx-text-area>
+                </div> -->
+            </div>
+          </dx-data-grid>
+
+
+        </div>
+
+        <div class="col-lg-5 col-md-5 col-sm12 col-xs-12">
+          <div class="row">
+            <div class="col-md-12 col-sm12 col-xs-12">
+              <h4><span class="glyphicon glyphicon-shopping-cart"></span> ORDER LIST</h4>
+              <div class="row">
+                <div class="col-md-2 col-sm3 col-xs-2">
+                  <label class="lable-sm">PO NO</label>
+                </div>
+                <div class="col-md-4 col-sm4col-xs-4">
+                  <div class="form-group">
+                    <input type="text" id="pono" name="pono" class="form-control input-sm" formControlName="pono" placeholder="Purchase Order No.">
+                  </div>
+                </div>
+              </div>
+              <dx-data-grid id="gridContainer" [dataSource]="orderitems" [sorting]="{mode: 'single'}" [columns]="columns2" [rowAlternationEnabled]="true"
+                [paging]="{ pageSize: 40 }">
+                <div *dxTemplate="let d of 'viewTemplate'">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-xs btn-danger" (click)="OnButDeleteClick(d.data.uid)" data-toggle="tooltip" title="Delete the Order."><span class="glyphicon glyphicon-remove"></span> </button>
+                  </div>
+                </div>
+                <div *dxTemplate="let d of 'infoTemplate2'">
+                  <table>
                     <tr>
-                        <td>{{d.data.idesc}}</td> 
-                    <tr>
-                    <tr>
-                        <td style="width:25px;">PRICE: {{d.data.price}}</td>                                           
-                    <tr>  
-                    <tr>
-                        <td style="width:25px;">UOM: {{d.data.uom}}</td>                       
-                    <tr>                   
-                    </table>       
+                      <td>{{d.data.idesc}}</td>
+                      <tr>
+                        <tr>
+                          <td style="width:25px;">PRICE: {{d.data.price}}</td>
+                          <tr>
+                            <tr>
+                              <td style="width:25px;">UOM: {{d.data.uom}}</td>
+                              <tr>
+                  </table>
                 </div>
                 <dxo-summary>
-                <dxi-total-item
-                    column="amt"
-                    summaryType="sum"
-                    displayFormat="{0}"
-                    valueFormat="fixedPoint"                      
-                    precision="2" 
-                    >
-                </dxi-total-item>
-                <dxi-total-item
-                    column="taxamt"
-                    summaryType="sum"
-                    displayFormat="{0}"
-                    valueFormat="fixedPoint"                      
-                    precision="2" 
-                    >
-                </dxi-total-item>
-                <dxi-total-item
-                    column="qty"
-                    displayFormat="{0}"
-                    summaryType="sum"
-                    valueFormat="fixedPoint"                      
-                    precision="2" 
-                    >
-                </dxi-total-item>
-                <dxi-total-item
-                    column="uom"
-                    displayFormat="TOTAL"
-                    summaryType="max"                  
-                    >
-                </dxi-total-item>
+                  <dxi-total-item column="amt" summaryType="sum" displayFormat="{0}" valueFormat="fixedPoint" precision="2">
+                  </dxi-total-item>
+                  <dxi-total-item column="taxamt" summaryType="sum" displayFormat="{0}" valueFormat="fixedPoint" precision="2">
+                  </dxi-total-item>
+                  <dxi-total-item column="qty" displayFormat="{0}" summaryType="sum" valueFormat="fixedPoint" precision="2">
+                  </dxi-total-item>
+                  <dxi-total-item column="uom" displayFormat="TOTAL" summaryType="max">
+                  </dxi-total-item>
                 </dxo-summary>
-            </dx-data-grid>
+              </dx-data-grid>
+            </div>
           </div>
-        </div> <!--row 1-->
-        <div class="row">
+          <!--row 1-->
+          <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-6">
-                <button type="button" 
-                    class="btn btn-large btn-block btn-primary"
-                    (click)="OnToggleAddr()"
-                    ><span class="glyphicon glyphicon-pushpin"></span> SHIPPING</button>   
+              <button type="button" class="btn btn-large btn-block btn-primary" (click)="OnToggleAddr()"><span class="glyphicon glyphicon-pushpin"></span> SHIPPING</button>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-6">
-                <button type="button" *ngIf="editmode!='VIEW'"
-                    [disabled]="!rform.valid || !haveItemOrder()" 
-                        (click)="OnProcessNext()"
-                    class="btn btn-large btn-block btn-success">
-                    <span class="glyphicon glyphicon-ok-circle"></span> CONFIRM</button>   
+              <button type="button" *ngIf="editmode!='VIEW'" [disabled]="!rform.valid || !haveItemOrder()" (click)="OnProcessNext()" class="btn btn-large btn-block btn-success">
+                        <span class="glyphicon glyphicon-ok-circle"></span> CONFIRM</button>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-6">
-                <button type="button" 
-                    (click)="onCancel()" 
-                    class="btn btn-large btn-block btn-warning">
-                    <span class="glyphicon glyphicon-remove"></span> CANCEL</button>   
+              <button type="button" (click)="onCancel()" class="btn btn-large btn-block btn-warning">
+                        <span class="glyphicon glyphicon-remove"></span> CANCEL</button>
             </div>
-        </div> <!--row 2-->
-       
-        <div class="row" *ngIf="showAddr">  
-             
+          </div>
+          <!--row 2-->
+
+          <div class="row" *ngIf="showAddr">
+
             <div class="col-md-10 col-sm-12 col-sx-12">
-                <div class="form-group"> 
-                        <label for="addr1"><span class="glyphicon glyphicon-envelope"></span> SHIP TO THIS ADDRESS:</label>    
-                        <input type="text" id="name" name="name"  class="form-control input-sm"                     
-                            formControlName="name" placeholder="Ship To Company Name">    
+              <div class="form-group">
+                <label for="addr1"><span class="glyphicon glyphicon-envelope"></span> SHIP TO THIS ADDRESS:</label>
+                <input type="text" id="name" name="name" class="form-control input-sm" formControlName="name" placeholder="Ship To Company Name">
+              </div>
+              <div class="form-group">
+                <input type="text" id="addr1" name="addr1" class="form-control input-sm" formControlName="addr1" placeholder="Address Line 1">
+              </div>
+              <div class="form-group">
+                <input type="text" id="addr2" name="addr2" class="form-control input-sm" formControlName="addr2" placeholder="Address Line 2">
+              </div>
+              <div class="form-group">
+                <input type="text" id="addr3" name="addr3" class="form-control input-sm" formControlName="addr3" placeholder="Address Line 3">
+              </div>
+              <div class="form-group">
+                <input type="text" id="addr4" name="addr4" class="form-control input-sm" formControlName="addr4" placeholder="Address Line 4">
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-sx-6">
+                  <div class="form-group">
+                    <input type="text" id="country" name="country" class="form-control input-sm" formControlName="country" placeholder="Country">
+                  </div>
                 </div>
-                <div class="form-group"> 
-                        <input type="text" id="addr1" name="addr1"  class="form-control input-sm"                     
-                            formControlName="addr1" placeholder="Address Line 1">    
+                <div class="col-md-6 col-sm-6 col-sx-6">
+                  <div class="form-group">
+                    <input type="text" id="city" name="city" class="form-control input-sm" formControlName="city" placeholder="City">
+                  </div>
                 </div>
-                <div class="form-group">     
-                        <input type="text" id="addr2" name="addr2"  class="form-control input-sm"                     
-                            formControlName="addr2" placeholder="Address Line 2">    
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-sx-6">
+                  <div class="form-group">
+                    <input type="text" id="state" name="state" class="form-control input-sm" formControlName="state" placeholder="State">
+                  </div>
                 </div>
-                <div class="form-group">     
-                    <input type="text" id="addr3" name="addr3"  class="form-control input-sm"                     
-                        formControlName="addr3" placeholder="Address Line 3">    
+                <div class="col-md-6 col-sm-6 col-sx-6">
+                  <div class="form-group">
+                    <input type="text" id="postal" name="postal" class="form-control input-sm" formControlName="postal" placeholder="Postal Code">
+                  </div>
                 </div>
-                <div class="form-group">     
-                    <input type="text" id="addr4" name="addr4"  class="form-control input-sm"                     
-                        formControlName="addr4" placeholder="Address Line 4">    
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-sx-12">
+                  <textarea rows="5" id="remark" name="remark" class="form-control input-sm" formControlName="remark" placeholder="Remark"></textarea>
                 </div>
-                    <div class="row">   
-                        <div class="col-md-6 col-sm-6 col-sx-6">
-                            <div class="form-group">     
-                                <input type="text" id="country" name="country"  class="form-control input-sm"                     
-                                    formControlName="country" placeholder="Country">    
-                            </div>                          
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-sx-6">
-                            <div class="form-group">     
-                                <input type="text" id="city" name="city"  class="form-control input-sm"                     
-                                        formControlName="city" placeholder="City">    
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">   
-                        <div class="col-md-6 col-sm-6 col-sx-6">
-                            <div class="form-group">     
-                                <input type="text" id="state" name="state"  class="form-control input-sm"                     
-                                    formControlName="state" placeholder="State">    
-                            </div>                         
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-sx-6">
-                            <div class="form-group">     
-                                <input type="text" id="postal" name="postal"  class="form-control input-sm"                     
-                                    formControlName="postal" placeholder="Postal Code" >    
-                            </div>
-                        </div>
-                    </div>  
-                <div class="row">  
-                   <div class="col-md-12 col-sm-12 col-sx-12">
-                        <textarea  rows="5" id="remark" name="remark"  class="form-control input-sm"                     
-                             formControlName="remark" placeholder="Remark"></textarea> 
-                    </div>   
-                </div>           
-                                
+              </div>
+
             </div>
-           
-        </div> <!--row 3-->
-    </div> <!--col-xs-5-->
- </div>
-</form> 
+
+          </div>
+          <!--row 3-->
+        </div>
+        <!--col-xs-5-->
+
+      </div>
+    </form>
+  </div>
+</div>
