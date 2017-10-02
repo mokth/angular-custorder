@@ -46,13 +46,47 @@
   <div class="col-lg-1 col-md-1 col-sm-hidden col-xs-hidden">
   </div>
   <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
-    <dx-data-grid id="gridContainer" [dataSource]="orderitems" [sorting]="{mode: 'single'}" [columns]="columns" [paging]="{ pageSize: 20 }"
-      [allowColumnResizing]="true" [columnMinWidth]="50" [columnAutoWidth]="true" [rowAlternationEnabled]="true">
+    <dx-data-grid id="gridContainer" 
+      [dataSource]="orderitems" 
+      [sorting]="{mode: 'single'}" 
+      [columns]="columns" 
+      [paging]="{ pageSize: 20 }"
+      [allowColumnResizing]="true" 
+      [columnMinWidth]="50" 
+      [columnAutoWidth]="true" 
+      [rowAlternationEnabled]="true">
       <div *dxTemplate="let d of 'remTemplate'">
         <div class="row">
           <div class="col-sx-12 wordwrap">{{d.data.note}}</div>
         </div>
       </div>
+      <div *dxTemplate="let d of 'infoTemplate3'">
+          <div class="row">
+            <div class="col-xs-12 wordwrap"><strong>{{d.data.icode}}</strong></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 wordwrap">{{d.data.idesc}}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">UNIT PRICE : <strong>{{d.data.price}} / {{d.data.uom}}</strong></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">PACK SIZE : <strong>{{d.data.psize}} {{d.data.defuom}}</strong></div>
+          </div>
+         
+        </div> 
+        <div *dxTemplate="let d of 'infoTemplate4'">
+            <div class="row">
+                <div class="col-xs-12"><p class="font-weight-bold text-danger text-right ">{{d.data.qty|number:'1.0-2'}}/{{d.data.uom}}</p></div>
+              </div>
+          <div class="row">
+            <div class="col-xs-12 wordwrap"><p class="text-danger text-right font-weight-bold">(T){{d.data.taxamt|number:'1.2-2'}}</p></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 wordwrap"><p class="text-danger text-right font-weight-bold">{{d.data.amt|number:'1.2-2'}}</p></div>
+          </div>
+         
+        </div> 
       <dxo-summary>
         <dxi-total-item column="amt" summaryType="sum" displayFormat="{0}" valueFormat="fixedPoint" precision="2">
         </dxi-total-item>

@@ -28,32 +28,33 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
   pono: string = "";
   editmode: string = 'NEW';
   title: string;
+  isMakeOrder: boolean;
+  currentItem:string;
+  currentUOM:string;
   columns = [
-    { dataField: 'icode', caption: 'ITEM', allowEditing: false, sortIndex: 0, sortOrder: 'asc', width:"22%" },
+    // { dataField: 'icode', caption: 'ITEM', allowEditing: false, sortIndex: 0, sortOrder: 'asc', width:"22%" },
+    { dataField: 'icode', caption: '', allowEditing: false, visible:false },
+    { dataField: 'idesc', caption: '', allowEditing: false, visible:false },
+    { dataField: 'note', caption: '', allowEditing: false, visible:false },
     { dataField: 'idesc', caption: 'DESCRIPTION', cellTemplate: 'infoTemplate', 
-      allowEditing: false, allowFiltering: false, width:"38%"
-    },
-    {
-       dataField: 'qty', caption: 'ORDER QTY', dataType: 'number', width:"10%",
-       editorOptions: {
-         showSpinButtons: true,
-         useLargeSpinButtons: false,
-         min: 0, height: 60
-       }, allowFiltering: false
-     },
-     { dataField: 'deldate', caption: 'DELIVER', dataType: 'date', format: 'dd/MM/yyyy', allowFiltering: false, width:"13%" },
-     { dataField: 'note', caption: 'NOTE', cellTemplate: 'remTemplate', editCellTemplate: 'dataCellTemplate', allowFiltering: false, width:"15%" }
+      allowEditing: false, allowFiltering: false
+    }
+    // {
+    //    dataField: 'qty', caption: 'ORDER QTY', dataType: 'number', width:"10%",
+    //    editorOptions: {
+    //      showSpinButtons: true,
+    //      useLargeSpinButtons: false,
+    //      min: 0, height: 60
+    //    }, allowFiltering: false
+    //  },
+    //  { dataField: 'deldate', caption: 'DELIVER', dataType: 'date', format: 'dd/MM/yyyy', allowFiltering: false, width:"13%" },
+    //  { dataField: 'note', caption: 'NOTE', cellTemplate: 'remTemplate', editCellTemplate: 'dataCellTemplate', allowFiltering: false, width:"15%" }
 
   ];
   columns2 = [
-    { dataField: 'icode', caption: '', cellTemplate: 'viewTemplate', width: 40 },
-    { dataField: 'icode', caption: 'ITEM', allowEditing: false, sortIndex: 0, sortOrder: 'asc' },
-    { dataField: 'uom', caption: 'DESC', cellTemplate: 'infoTemplate2' },
-    { dataField: 'qty', caption: 'QTY' },
-    { dataField: 'taxamt', caption: 'TAX', dataType: 'number', format: 'fixedPoint', precision: 2 },
-    { dataField: 'amt', caption: 'AMT', dataType: 'number', format: 'fixedPoint', precision: 2 },
-    { dataField: 'deldate', caption: 'DELIVER', dataType: 'date', format: 'dd/MM/yyyy' }
-
+    { dataField: 'icode', caption: 'ITEM DESCRIPTION',  cellTemplate: 'infoTemplate3', width: '65%' },
+    { dataField: 'icode', caption: 'ORDER',  cellTemplate: 'infoTemplate4', width: '35%' }
+  
   ];
 
   constructor(private auth: AuthserviceService,
@@ -62,7 +63,12 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
     private route: ActivatedRoute,
     @Inject('API_URL') private apiUrl: string) { }
 
+    mobHeight: any;
+    mobWidth: any;
+
   ngOnInit() {
+    this.mobHeight =window.innerWidth;
+    this.mobWidth = window.innerHeight;
     this.route.params
       .subscribe(
       (params: Params) => {
@@ -79,6 +85,9 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
       );
 
     this.rform = new FormGroup({
+      qty: new FormControl(null, null),
+      deldate: new FormControl(null, null),
+      note: new FormControl(null, null),
       name: new FormControl(null, Validators.required),
       addr1: new FormControl(null, Validators.required),
       addr2: new FormControl(null, Validators.required),
@@ -307,9 +316,7 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
   }
 
   getImageUrl(path: string) {
-    console.log(path);
     let newpath = path.replace('~', 'http://www.wincom2cloud.com/erpv4');
-    console.log(newpath);
     return newpath;// path.replace('~', 'http://www.wincom2cloud.com/erpv4');
   }
 
@@ -329,5 +336,47 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
         this.custitems[index2].deldate = null;
       }
     }
+  }
+
+  OnMakeOrder(icode,uom){
+    this.isMakeOrder=true;
+    this.currentItem = icode;
+    this.currentUOM = uom;
+  }
+
+  onAddOrder(){
+    let found = this.custitems.find(x=>x.icode==this.currentItem && x.uom==this.currentUOM);
+    if (found!=null){
+      let qty = this.rform.get('qty').value;
+      let deldate= this.rform.get('deldate').value;
+      let note = this.rform.get('note').value;
+      found.qty =qty;
+      found.deldate = deldate;
+      found.note = note;
+      this.AddOrderItem(found); 
+    }
+    this.onCancelOrder();
+  }
+
+  AddOrderItem(item:Custitem) {
+    var index = this.orderitems.findIndex(x => x.uid == item.uid);
+    if (index > -1) { //found
+      this.orderitems[index].qty = item.qty;
+      this.orderitems[index].deldate = item.deldate;
+      this.orderitems[index].amt = item.qty *item.price;
+      this.orderitems[index].taxamt = this.calculateTax(item);
+      this.orderitems[index].note = item.note;
+    } else {
+      item.amt = item.qty * item.price;
+      item.taxamt = this.calculateTax(item);
+      this.orderitems.push(item);
+      //console.log(this.custitems.length);
+    }
+  }
+
+  onCancelOrder(){
+    this.isMakeOrder=false;
+    this.currentItem = "";
+    this.currentUOM = "";
   }
 }

@@ -9,9 +9,16 @@
 }
 .name {
   font-size: 14px;
-  color: #333;
+  color: #fed136;
+  font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
   padding-top: 15px;
 }
+h2 {
+  font-weight: bold;
+  font-size: 30px;
+  font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-transform: uppercase; }
+
 .form {
     margin: 20px auto;
 }
@@ -30,5 +37,6 @@
   background-size:cover; 
 }
 .footer {
-  background-color:lightslategray
+  background-color:lightslategray;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }

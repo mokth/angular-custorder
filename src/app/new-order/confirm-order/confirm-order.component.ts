@@ -29,7 +29,10 @@ export class ConfirmOrderComponent implements OnInit,CanComponentDeactivate {
   editmode:string;
   sono:string="AUTO";
   title:string;
-  columns = [
+  mobHeight: any;
+  mobWidth: any;
+  columns:any;
+  columns1 = [
         { dataField: 'icode', caption: 'ITEM',width:120  },
         { dataField: 'idesc', caption:'DESCRIPTION',width:300 },
         // { dataField: 'image',caption:'IMAGE',width:200, cellTemplate:'cellTemplate'},
@@ -42,15 +45,32 @@ export class ConfirmOrderComponent implements OnInit,CanComponentDeactivate {
         { dataField: 'note', caption: 'NOTE',width:150,cellTemplate:'remTemplate' }
 
     ];
-
+  
+    columns2 = [
+      { dataField: 'icode', caption: 'ITEM DESCRIPTION',  cellTemplate: 'infoTemplate3', width: '65%' },
+      { dataField: 'icode', caption: 'ORDER',  cellTemplate: 'infoTemplate4', width: '35%' }
+    
+    ];
   constructor(private auth:AuthserviceService,
               private router:Router,
               private route: ActivatedRoute,
               private http:Http,
               @Inject('API_URL') private apiUrl:string
-              ) { }
-
-  ngOnInit() {
+              ) 
+              {
+                this.mobHeight =window.innerHeight;
+                this.mobWidth = window.innerWidth;
+                if ( this.mobWidth < 500){
+                 this.columns = this.columns2;
+                }else {
+                  this.columns = this.columns1;
+                }
+                console.log(this.mobWidth);
+               }
+  
+          
+   ngOnInit() {
+    
     let token= localStorage.getItem('_order');
     var psjons = JSON.parse(token);    
     let token2= localStorage.getItem('_shipaddr');

@@ -15,7 +15,8 @@ li{
   }
 .name {
   font-size: 14px;
-  color: #333;
+  font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
+  color: #fed136;
   padding-top: 15px;
 }
 
@@ -31,7 +32,7 @@ li{
     background-color:#F2F3F4  ;
     background-image: none;
     color: blue;
-    font-family: 'MenuFont';
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .navbar-default .navbar-brand {
@@ -111,7 +112,7 @@ li{
     background-color: #C0C0C0;
     background-image: none;
     color: black;
-    font-family: 'MenuFont';
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding-left: 10px;
   }
 

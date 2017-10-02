@@ -9,11 +9,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-7 col-md-7 col-sm12 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm12 col-xs-12">
           <dx-data-grid id="gridContainer" 
             [dataSource]="custitems" 
             [sorting]="{mode: 'single'}" 
-            [editing]="{ mode: 'batch',allowUpdating: true }"
             [columns]="columns" 
             [paging]="{ pageSize: 5 }" 
             [filterRow]="{ visible: true }" 
@@ -21,65 +20,100 @@
             [allowColumnResizing]="true" 
             [columnMinWidth]="50" 
             [rowAlternationEnabled]="true" 
-            [columnAutoWidth]="true"
-            (onRowUpdated)="onRowUpdated($event)"
-            (onEditingStart)="onEditingStart($event)" 
-            (onToolbarPreparing)="onToolbarPreparing($event)">
-            <div *dxTemplate="let data of 'buttSaveGroup'">
-              <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-success" data-toggle="tooltip" title="Add to Order List." (click)="AddToOrder()"><span class="glyphicon glyphicon-shopping-cart"></span> ADD TO ORDER LIST </button>
-                <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Add to Order List." (click)="CancelOrder()"><span class="glyphicon glyphicon-remove"></span> DISCHARGE CHANGES</button>
-              </div>
-            </div>
+            [columnAutoWidth]="true">
+            
             <div *dxTemplate="let d of 'infoTemplate'">
+              <div class="row">
+                <div class="col-xs-12 wordwrap"><strong>{{d.data.icode}}</strong></div>
+              </div>
               <div class="row">
                 <div class="col-xs-12 wordwrap">{{d.data.idesc}}</div>
               </div>
               <div class="row">
-                <div class="col-xs-12">PRICE : {{d.data.price}} {{d.data.uom}}</div>
+                <div class="col-xs-12">UNIT PRICE : <strong>{{d.data.price|number:'1.2-2'}} / {{d.data.uom}}</strong></div>
               </div>
               <div class="row">
-                <div class="col-xs-12">P/SIZE : {{d.data.psize}} {{d.data.defuom}}</div>
+                <div class="col-xs-12">PACK SIZE : <strong>{{d.data.psize}} {{d.data.defuom}}</strong></div>
               </div>
               <div class="row">
                 <div class="col-xs-12">
-                  <img [src]="getImageUrl(d.data.image)" onerror="this.onerror=null;this.src='http://www.wincom2cloud.com/erpv4/Inventory/Image/noimage.png';"
+                  <img class="img-responsive" [src]="getImageUrl(d.data.image)"
+                     onerror="this.onerror=null;this.src='http://www.wincom2cloud.com/erpv4/Inventory/Image/noimage.png';"
                   />
                 </div>
               </div>
-            </div>
-            <div *dxTemplate="let data of 'dataCellTemplate'">
-              <dx-text-area [autoResizeEnabled]="true" [value]="data.value" (onValueChanged)="onValueChanged($event, data)">
-                ></dx-text-area>
-            </div>
-            <div *dxTemplate="let d of 'remTemplate'">
-              <div class="row">
-                <div class="col-sx-12 wordwrap">{{d.data.note}}</div>
+              <div class="row" *ngIf="!isMakeOrder">
+                <div class="col-md-3 col-xs-12">
+                  <button type="button" class="btn btn-block btn-primary"
+                   (click)="OnMakeOrder(d.data.icode,d.data.uom)">
+                    <span class="glyphicon glyphicon-pushpin"></span>ORDER</button>
+                </div>
+                <div class="col-md-2 col-xs-5" *ngIf="d.data.qty>0">
+                     <p class="text-center text-danger textcenter">{{d.data.qty|number:'1.0-2'}}</p>
+                </div>
               </div>
+
+              <!-- Order entry -->
+              <div *ngIf="isMakeOrder && currentItem==d.data.icode && currentUOM==d.data.uom">
+                  <div class="row">
+                      <div class="col-md-2 col-xs-4">
+                        <h6>ORDER QTY :</h6>
+                      </div>
+                      <div class="col-md-4 col-xs-8">
+                          <input type="number" id="qty" name="qty" 
+                          class="form-control input-sm" 
+                          formControlName="qty">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-2 col-xs-4">
+                        <h6>DELIVERY :</h6>
+                      </div>
+                      <div class="col-md-4 col-xs-8">
+                          <input type="date" id="deldate" name="deldate" 
+                                class="form-control input-sm" 
+                                formControlName="deldate">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-2 col-xs-4">
+                        <h6>NOTE :</h6>
+                      </div>
+                      <div class="col-md-4 col-xs-8">
+                          <dx-text-area [autoResizeEnabled]="true" id="note" name="note" 
+                              class="form-control input-sm" 
+                            formControlName="note">
+                            </dx-text-area>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-2 col-xs-6">
+                          <button type="button" class="btn btn-block btn-success"
+                           (click)="onAddOrder()">
+                              <span class="glyphicon glyphicon-pushpin"></span>ADD</button>
+                      </div>
+                      <div class="col-md-2 col-xs-6">
+                          <button type="button" class="btn btn-block btn-danger"
+                          (click)="onCancelOrder()">
+                              <span class="glyphicon glyphicon-pushpin"></span>CANCEL</button>
+                      </div>
+                  </div>
+               </div>  
+               <!-- Order entry -->
+
             </div>
-            <div *dxTemplate="let d of 'editTemplate'">
-                <div class="row">
-                  <input type="number" [value]="d.data.qty"  (onValueChanged)="onValueChanged($event, d.data.qty)">
-                </div>
-                <div class="row">
-                    <input type="date" [value]="d.data.deldate"  (onValueChanged)="onValueChanged($event, d.data.deldate)">
-                </div>
-                <!-- <div class="row">
-                    <dx-text-area [autoResizeEnabled]="true" [value]="d.data.note.value" (onValueChanged)="onValueChanged($event, d.data.note)">
-                        ></dx-text-area>
-                </div> -->
-            </div>
+           
           </dx-data-grid>
 
 
         </div>
 
-        <div class="col-lg-5 col-md-5 col-sm12 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm12 col-xs-12">
           <div class="row">
             <div class="col-md-12 col-sm12 col-xs-12">
               <h4><span class="glyphicon glyphicon-shopping-cart"></span> ORDER LIST</h4>
               <div class="row">
-                <div class="col-md-2 col-sm3 col-xs-2">
+                <div class="col-md-2 col-sm3 col-xs-12">
                   <label class="lable-sm">PO NO</label>
                 </div>
                 <div class="col-md-4 col-sm4col-xs-4">
@@ -88,13 +122,46 @@
                   </div>
                 </div>
               </div>
-              <dx-data-grid id="gridContainer" [dataSource]="orderitems" [sorting]="{mode: 'single'}" [columns]="columns2" [rowAlternationEnabled]="true"
+              <dx-data-grid id="gridContainer" 
+                     [dataSource]="orderitems" 
+                     [sorting]="{mode: 'single'}" 
+                     [columns]="columns2" 
+                     [rowAlternationEnabled]="true"
                 [paging]="{ pageSize: 40 }">
                 <div *dxTemplate="let d of 'viewTemplate'">
                   <div class="btn-group">
                     <button type="button" class="btn btn-xs btn-danger" (click)="OnButDeleteClick(d.data.uid)" data-toggle="tooltip" title="Delete the Order."><span class="glyphicon glyphicon-remove"></span> </button>
                   </div>
                 </div>
+                
+                <div *dxTemplate="let d of 'infoTemplate3'">
+                  <div class="row">
+                    <div class="col-xs-12 wordwrap"><strong>{{d.data.icode}}</strong></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 wordwrap">{{d.data.idesc}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12">UNIT PRICE : <strong>{{d.data.price}} / {{d.data.uom}}</strong></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12">PACK SIZE : <strong>{{d.data.psize}} {{d.data.defuom}}</strong></div>
+                  </div>
+                 
+                </div> 
+                <div *dxTemplate="let d of 'infoTemplate4'">
+                    <div class="row">
+                        <div class="col-xs-12"><p class="font-weight-bold text-danger text-right ">{{d.data.qty|number:'1.0-2'}}/{{d.data.uom}}</p></div>
+                      </div>
+                  <div class="row">
+                    <div class="col-xs-12 wordwrap"><p class="text-danger text-right font-weight-bold">(T){{d.data.taxamt|number:'1.2-2'}}</p></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 wordwrap"><p class="text-danger text-right font-weight-bold">{{d.data.amt|number:'1.2-2'}}</p></div>
+                  </div>
+                 
+                </div> 
+
                 <div *dxTemplate="let d of 'infoTemplate2'">
                   <table>
                     <tr>
