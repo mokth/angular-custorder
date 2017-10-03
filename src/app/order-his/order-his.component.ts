@@ -26,25 +26,48 @@ export class OrderHisComponent implements OnInit {
   pono:string;
   message:string;
   editmode:string;
+  mobHeight: any;
+  mobWidth: any;
+  columns:any;
 
-  columns = [
+  columns1 = [
         { dataField: 'sono',width:"90", caption: 'ACTION',cellTemplate:'viewTemplate',allowEditing: false },
-        // { dataField: 'sono', caption: '',cellTemplate:'editTemplate',allowEditing: false },
-        // { dataField: 'sono', caption: '',cellTemplate:'cancelTemplate',allowEditing: false },
-        { dataField: 'sodate', caption: 'DATE', dataType: 'date',
+         { dataField: 'sodate', caption: 'DATE', dataType: 'date',
               format: 'dd/MM/yyyy',allowEditing: false,sortIndex: 0, sortOrder: 'desc'  },
         { dataField: 'sono', caption: 'SO NO',allowEditing: false },
         { dataField: 'pono', caption: 'PO NO',allowEditing: false },
-        { dataField: 'status', caption: 'STATUS',allowEditing: false },
+        { dataField: 'status', caption: 'STATUS',allowEditing: false, cellTemplate:'statusTemplate' },
         { dataField: 'taxamt', caption: 'TAX',dataType: 'number',format: 'fixedPoint', precision: 2 ,allowEditing: false  },
         { dataField: 'amt', caption: 'AMOUNT',dataType: 'number',format: 'fixedPoint', precision: 2,allowEditing: false   },
         { dataField: 'remark', caption:'REMARK',cellTemplate:'remarkTemplate'  }
     ];  
 
+   columns2 = [
+    { dataField: 'sono',width:"50", caption: '...',cellTemplate:'viewTemplateSm',allowEditing: false },
+      { dataField: 'sono', caption: 'ACTION',allowEditing: false, visible:false },
+       { dataField: 'sodate', caption: 'DATE', allowEditing: false, visible:false  },
+      { dataField: 'sono', caption: 'SO NO',allowEditing: false, visible:false },
+      { dataField: 'pono', caption: 'PO NO',allowEditing: false, visible:false },
+      { dataField: 'status', caption: 'STATUS',allowEditing: false, visible:false  },
+      { dataField: 'sono', caption: 'SO NO',allowEditing: false,cellTemplate:'soTemplate'  },
+      { dataField: 'amt', caption: 'AMOUNT',cellTemplate:'amtTemplate' }
+      
+  ];  
+
   constructor(private auth:AuthserviceService,
               private http:Http,
               private router:Router,              
-              @Inject('API_URL') private apiUrl:string) { }
+              @Inject('API_URL') private apiUrl:string){
+                this.mobHeight =window.innerHeight;
+                this.mobWidth = window.innerWidth;
+                if ( this.mobWidth < 500){
+                 this.columns = this.columns2;
+                }else {
+                  this.columns = this.columns1;
+                }
+
+              }
+            
 
 
   ngOnInit() {     

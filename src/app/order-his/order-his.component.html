@@ -15,7 +15,8 @@
                             [dataSource]="soheaders"
                             [sorting]="{mode: 'single'}"
                             [columns]="columns"
-                            [paging]="{ pageSize: 10 }"  
+                            [paging]="{ pageSize: (mobWidth < 500)?5:10 }"  
+                            [searchPanel]="{ visible: true }"
                             [allowColumnResizing]="true"                            
                             [columnMinWidth]="50"
                             [rowAlternationEnabled]="true"
@@ -26,29 +27,79 @@
                         <button type="button" class="btn btn-xs btn-info"
                             (click)="OnButViewClick(d.data.sono)"
                             data-toggle="tooltip" title="View the Order."
-                            ><span class="glyphicon glyphicon-eye-open"></span> </button> 
+                            ><i class="fa fa-eye" aria-hidden="true"></i> </button> 
                         <button type="button" [disabled]="d.data.status !='NEW'" 
                             class="btn btn-xs" [ngClass]="getbuttClass(d.data.status)"
                             (click)="OnButEditClick(d.data.sono)"
                             data-toggle="tooltip" title="Edit the Order."
-                            ><span class="glyphicon glyphicon-pencil"></span> </button> 
+                            ><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button> 
                         <button [disabled]="d.data.status !='NEW'" 
                             [ngClass]="getbuttClass2(d.data.status)"
                             type="button" class="btn btn-xs"
                             (click)="OnButCancelClick(d.data.sono)"
                             data-toggle="tooltip" title="Cancel the Order."
-                            ><span class="glyphicon glyphicon-remove"></span> </button>      
+                            ><i class="fa fa-trash" aria-hidden="true"></i>  </button>      
                     </div>
                 </div>
-                <!-- <div *dxTemplate="let d of 'editTemplate'"> 
-                                 
+                <div *dxTemplate="let d of 'viewTemplateSm'"> 
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" class="btn btn-xs btn-info btn-block"
+                                (click)="OnButViewClick(d.data.sono)"
+                                data-toggle="tooltip" title="View the Order."
+                                ><i class="fa fa-eye" aria-hidden="true"></i> </button> 
+                        </div>   
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" [disabled]="d.data.status !='NEW'" 
+                                class="btn btn-xs btn-block" [ngClass]="getbuttClass(d.data.status)"
+                                (click)="OnButEditClick(d.data.sono)"
+                                data-toggle="tooltip" title="Edit the Order."
+                                ><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button [disabled]="d.data.status !='NEW'" 
+                                [ngClass]="getbuttClass2(d.data.status)"
+                                type="button" class="btn btn-xs btn-block"
+                                (click)="OnButCancelClick(d.data.sono)"
+                                data-toggle="tooltip" title="Cancel the Order."
+                                ><i class="fa fa-trash" aria-hidden="true"></i>  </button>      
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-12" *dxTemplate="let d of 'cancelTemplate'"> 
-                    
-                </div> -->
-                  <div *dxTemplate="let d of 'remarkTemplate'">
+                <div *dxTemplate="let d of 'remarkTemplate'">
                     <div class="wordwrap" >{{d.data.remark}}</div> 
                 </div>
+                <div *dxTemplate="let d of 'statusTemplate'">
+                    <div [ngStyle]="d.data.status=='CONFIRM' && {'color': 'red'}" >{{d.data.status}}</div> 
+                </div>
+                <div *dxTemplate="let d of 'soTemplate'">
+                    <div class="row">
+                        <div class="col-xs-12"><p class="font-weight-bold">{{d.data.sodate | date:'dd-MM-y' }}</p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12"><p class="fontbold ">{{d.data.sono}}</p></div>
+                        </div>
+                    <div class="row">
+                       <div class="col-xs-12 wordwrap"><p class="font-weight-bold">{{d.data.pono}}</p></div>
+                    </div>                      
+                </div> 
+                <div *dxTemplate="let d of 'amtTemplate'">
+                    <div class="row">
+                       <div class="col-xs-12"><p class="font-weight-bold">{{d.data.taxamt | number:'1.2-2' }}</p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12"><p class="fontbold">{{d.data.amt | number:'1.2-2' }}</p></div>
+                    </div>      
+                    <div class="row">
+                     <div class="col-xs-12">
+                          <div [ngStyle]="d.data.status=='CONFIRM' && {'color': 'red'}" >{{d.data.status}}</div> 
+                      </div>
+                    </div>                         
+                </div> 
             </dx-data-grid>
         </div>        
         <div class="col-md-1 col-xs-hidding">

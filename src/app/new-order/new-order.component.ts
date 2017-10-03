@@ -31,6 +31,9 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
   isMakeOrder: boolean;
   currentItem:string;
   currentUOM:string;
+  mobHeight: any;
+  mobWidth: any;
+  isSmallScreen:boolean;
   columns = [
     // { dataField: 'icode', caption: 'ITEM', allowEditing: false, sortIndex: 0, sortOrder: 'asc', width:"22%" },
     { dataField: 'icode', caption: '', allowEditing: false, visible:false },
@@ -61,10 +64,15 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
     private http: Http,
     private router: Router,
     private route: ActivatedRoute,
-    @Inject('API_URL') private apiUrl: string) { }
-
-    mobHeight: any;
-    mobWidth: any;
+    @Inject('API_URL') private apiUrl: string) {
+      this.mobHeight =window.innerHeight;
+      this.mobWidth = window.innerWidth;
+      if ( this.mobWidth < 500){
+       this.isSmallScreen = true;
+      }else {
+        this.isSmallScreen = false;
+      }
+     }
 
   ngOnInit() {
     this.mobHeight =window.innerWidth;

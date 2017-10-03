@@ -13,8 +13,19 @@ import { AuthserviceService } from "app/authservice.service";
 export class MainMenuComponent implements OnInit {
   fullname:string;
   isopen:boolean=false;
+  mobHeight: any;
+  mobWidth: any;
+  isSmallScreen:boolean;
   constructor(private auth:AuthserviceService,
-              private router: Router) { }
+              private router: Router) {
+                this.mobHeight =window.innerHeight;
+                this.mobWidth = window.innerWidth;
+                if ( this.mobWidth < 500){
+                  this.isSmallScreen =true;
+                }else {
+                  this.isSmallScreen =false;
+                }
+               }
 
   ngOnInit() {
      //this.win.nativeWindow.document.getElementById("carousel-logo").click();

@@ -4,3 +4,8 @@
    white-space: -o-pre-wrap;   /* Opera 7 */    
    word-wrap: break-word;      /* IE */
 }
+.fontbold {
+    /* font-family: 'Frutiger,Helvetica,Trajan,Garamond,Futura'; */
+    font-weight: bold;
+    font-style: normal;
+}

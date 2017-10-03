@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxLookupModule } from 'devextreme-angular/ui/lookup';
 import { DxTextAreaModule } from 'devextreme-angular/ui/text-area';
-import { PdfViewerComponent } from 'ng2-pdf-viewer';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -22,9 +22,7 @@ import { LogOutComponent } from './login/log-out/log-out.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ForgortPassComponent } from './login/forgort-pass/forgort-pass.component';
 import { ChangePassComponent } from './login/change-pass/change-pass.component';
-import { MyPdfViewerComponent } from 'app/pdf-viewer/mypdf-viewer.component';
 import { WindowRef } from "app/shared/window-ref";
-import { OdataTestComponent } from './odata-test/odata-test.component';
 
 
 const appRoutes: Routes = [
@@ -33,8 +31,7 @@ const appRoutes: Routes = [
   { path: 'login',component:LoginComponent},
   { path: 'logout',component:LogOutComponent},
   { path: 'forgot',component:ForgortPassComponent},
-  { path: 'change',component:ChangePassComponent, canActivate: [AuthguardService] },  
-  { path: 'test',component:OdataTestComponent},
+  { path: 'change',component:ChangePassComponent, canActivate: [AuthguardService] },
   { path: 'order/:mode',component:NewOrderComponent,canActivate: [AuthguardService], canDeactivate: [CanDeactivateGuard]},
   { path: 'confirm/:mode',component: ConfirmOrderComponent,canActivate: [AuthguardService], canDeactivate: [CanDeactivateGuard]},
   { path: 'sohis',component: OrderHisComponent,canActivate: [AuthguardService], canDeactivate: [CanDeactivateGuard]},
@@ -52,10 +49,7 @@ const appRoutes: Routes = [
     LogOutComponent,
     UserProfileComponent,
     ForgortPassComponent,
-    ChangePassComponent,
-    MyPdfViewerComponent,
-    PdfViewerComponent,
-    OdataTestComponent
+    ChangePassComponent
   ],
   imports: [
     BrowserModule,

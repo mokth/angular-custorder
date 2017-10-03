@@ -13,7 +13,7 @@
               <img height="40" src="./assets/logo2.png">            
         </a>
 
-        <span class="name pull-left text-center title">{{fullname}}</span>
+        <span [ngStyle]="isSmallScreen && {'font-size': '9px'}" class="name pull-left text-center title">{{fullname}}</span>
 
       </div>
     </div>
@@ -42,7 +42,7 @@
       </ul>-->
   </div>
 </nav>
-<div style="margin-top:7%">
+<div  [ngStyle]="isSmallScreen && {'margin-top': '40%'}" style="margin-top:7%">
 <div class="row">
   <div class="col-md-10 col-md-offset-2">
     <div id="carousel-logo" class="carousel slide" data-ride="carousel"  data-interval="4000">
@@ -61,28 +61,28 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
           <div class="item active">
-             <a href="http://www.chunbe.com/"><img src="./assets/carousel8.jpg" alt="..." ></a>
+             <a href="http://www.chunbe.com/"><img [ngStyle]="isSmallScreen && 'img-responsive'" src="./assets/carousel8.jpg" alt="..." ></a>
             </div>
         <div class="item">
-            <a href="http://www.chunbe.com/"><img src="./assets/carousel1.jpg" alt="..."></a>
+            <a href="http://www.chunbe.com/"><img [ngStyle]="isSmallScreen && 'img-responsive'" src="./assets/carousel1.jpg" alt="..."></a>
         </div>
         <div class="item">
-            <a href="http://www.chunbe.com/"><img src="./assets/carousel2.jpg" alt="..."></a>
+            <a href="http://www.chunbe.com/"><img  [ngStyle]="isSmallScreen && 'img-responsive'" src="./assets/carousel2.jpg" alt="..."></a>
         </div>
         <div class="item">
-            <a href="http://www.chunbe.com/"><img src="./assets/carousel3.jpg" alt="..."></a>
+            <a href="http://www.chunbe.com/"><img  [ngStyle]="isSmallScreen && 'img-responsive'" src="./assets/carousel3.jpg" alt="..."></a>
         </div>
         <div class="item">
-            <a href="http://www.chunbe.com/"><img src="./assets/carousel4.jpg" alt="..."></a>
+            <a href="http://www.chunbe.com/"><img  [ngStyle]="isSmallScreen && 'img-responsive'" src="./assets/carousel4.jpg" alt="..."></a>
         </div>
         <div class="item">
-            <a href="http://www.chunbe.com/"><img src="./assets/carousel5.jpg" alt="..."></a>
+            <a href="http://www.chunbe.com/"><img  [ngStyle]="isSmallScreen && 'img-responsive'" src="./assets/carousel5.jpg" alt="..."></a>
         </div>
         <div class="item">
-            <a href="http://www.chunbe.com/"><img src="./assets/carousel6.jpg" alt="..."></a>
+            <a href="http://www.chunbe.com/"><img [ngStyle]="isSmallScreen && 'img-responsive'" src="./assets/carousel6.jpg" alt="..."></a>
           </div>
           <div class="item">
-              <a href="http://www.chunbe.com/"><img src="./assets/carousel7.jpg" alt="..."></a>
+              <a href="http://www.chunbe.com/"><img  [ngStyle]="isSmallScreen && 'img-responsive'"  src="./assets/carousel7.jpg" alt="..."></a>
           </div>
        
       </div>
