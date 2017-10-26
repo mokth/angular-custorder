@@ -3,12 +3,10 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { Http,Headers } from "@angular/http";
 
-import { Custitem } from "app/entities/cust-item";
-import { ShipAddr } from "app/entities/shipp-addr";
 import { CanComponentDeactivate } from "app/canDeactivateGuard";
-import { SalesOrder } from "app/entities/sales-order";
 import { AuthserviceService } from "app/authservice.service";
-import { CustSOItem } from "app/entities/so-items";
+import { SalesOrder,Custitem,ShipAddr,CustSOItem } from 'app/entities/models';
+
 
 @Component({
   selector: 'app-confirm-order',

@@ -4,10 +4,7 @@ import { Router } from "@angular/router";
 import { DxDataGridComponent } from "devextreme-angular/ui/data-grid";
 
 import { AuthserviceService } from "app/authservice.service";
-import { CustSOHeader } from "app/entities/so-header";
-import { CustSOItem } from "app/entities/so-items";
-import { Custitem } from "app/entities/cust-item";
-import { ShipAddr } from "app/entities/shipp-addr";
+import { CustSOHeader,CustSOItem,Custitem,ShipAddr } from "app/entities/models";
 
 
 @Component({

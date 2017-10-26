@@ -1,11 +1,10 @@
 <!-- onerror="this.onerror=null;this.src='http://www.wincom2cloud.com/erpv4/Inventory/Image/noimage.png';"/> -->
 <div class="row">
-  <div class="col-md-12 col-sm12 col-xs-12">
+  <div class="col-md-12 col-sm-12 col-xs-12">
     <form class="form" [formGroup]="rform">
       <div class="row">
-        <div class="col-md-12 col-sm12 col-xs-12">
-          <h3><span class="col-lg-7 col-md-7 col-sm12 col-xs-12 label label-default"><span class="glyphicon glyphicon-list-alt"></span>            {{title}}</span>
-          </h3>
+        <div class="col-md-12 col-sm-12 col-xs-12">          
+          <p class="label-block"><i class="fa fa-shopping-basket" aria-hidden="true"> {{title}}</i></p>
         </div>
       </div>
       <div class="row">
@@ -49,7 +48,7 @@
                          <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> ORDER</button>
                     </div>
                     <div class="col-md-2 col-xs-5" *ngIf="d.data.qty>0">
-                      <p class="text-center text-danger textcenter">{{d.data.qty|number:'1.0-2'}}</p>
+                      <p class="text-center text-danger textcenter">{{d.data.qty|number:'1.0-2'}} {{d.data.uom}}</p>
                     </div>
                   </div>                
               </div>
@@ -92,10 +91,10 @@
                         <h6>NOTE :</h6>
                       </div>
                       <div class="col-md-4 col-xs-8">
-                          <dx-text-area [autoResizeEnabled]="true" id="note" name="note" 
+                          <textarea  id="note" name="note" row="3"
                               class="form-control input-sm" 
                             formControlName="note">
-                            </dx-text-area>
+                            </textarea>
                       </div>
                   </div>
                   <div class="row">
@@ -164,29 +163,15 @@
                 <div *dxTemplate="let d of 'infoTemplate4'">
                     <div class="row">
                         <div class="col-xs-12"><p class="font-weight-bold text-danger text-right ">{{d.data.qty|number:'1.0-2'}}/{{d.data.uom}}</p></div>
+                        <div class="col-xs-12 wordwrap"><p class="text-danger text-right font-weight-bold">(T){{d.data.taxamt|number:'1.2-2'}}</p></div>
+                        <div class="col-xs-12 wordwrap"><p class="text-danger text-right font-weight-bold">{{d.data.amt|number:'1.2-2'}}</p></div>
+                        <div class="col-xs-12 wordwrap" *ngIf="!isSmallScreen"><p class="text-danger text-right font-weight-bold">DEL DATE {{d.data.deldate|date:'dd-MM-yyyy'}}</p></div>
+                        <div class="col-xs-12 wordwrap" *ngIf="isSmallScreen"><p class="text-danger text-right font-weight-bold">(D) {{d.data.deldate|date:'dd-MM-yyyy'}}</p></div>
+                        <div class="col-xs-12 wordwrap" *ngIf="!isSmallScreen"><p class="text-danger small"><em>Note: {{d.data.note}}</em></p></div>
                       </div>
-                  <div class="row">
-                    <div class="col-xs-12 wordwrap"><p class="text-danger text-right font-weight-bold">(T){{d.data.taxamt|number:'1.2-2'}}</p></div>
-                  </div>
-                  <div class="row">
-                    <div class="col-xs-12 wordwrap"><p class="text-danger text-right font-weight-bold">{{d.data.amt|number:'1.2-2'}}</p></div>
-                  </div>
-                 
                 </div> 
 
-                <div *dxTemplate="let d of 'infoTemplate2'">
-                  <table>
-                    <tr>
-                      <td>{{d.data.idesc}}</td>
-                      <tr>
-                        <tr>
-                          <td style="width:25px;">PRICE: {{d.data.price}}</td>
-                          <tr>
-                            <tr>
-                              <td style="width:25px;">UOM: {{d.data.uom}}</td>
-                              <tr>
-                  </table>
-                </div>
+             
                 <dxo-summary>
                   <dxi-total-item column="amt" summaryType="sum" displayFormat="{0}" valueFormat="fixedPoint" precision="2">
                   </dxi-total-item>

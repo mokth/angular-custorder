@@ -39,3 +39,16 @@
       background-color: #D0E1B8;
  }
 
+ .label-block {
+  font-weight: normal;
+  font-size: 1.5em;
+  display: block;
+  padding-left: 20px;            
+  border: 1px solid transparent;
+  color:#fff;
+  background-color:#336B87;
+  text-align: left;
+  white-space: nowrap;    
+  border-radius: .25em;
+  width: 100%;
+}

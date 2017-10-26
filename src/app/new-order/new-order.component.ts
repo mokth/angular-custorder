@@ -6,9 +6,8 @@ import { Observable } from "rxjs/Observable";
 import { DxDataGridComponent } from "devextreme-angular/ui/data-grid";
 
 import { AuthserviceService } from "app/authservice.service";
-import { Custitem } from "app/entities/cust-item";
-import { ShipAddr } from "app/entities/shipp-addr";
 import { CanComponentDeactivate } from "app/canDeactivateGuard";
+import { Custitem,ShipAddr } from 'app/entities/models';
 
 
 @Component({
@@ -42,22 +41,10 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
     { dataField: 'idesc', caption: 'DESCRIPTION', cellTemplate: 'infoTemplate', 
       allowEditing: false, allowFiltering: false
     }
-    // {
-    //    dataField: 'qty', caption: 'ORDER QTY', dataType: 'number', width:"10%",
-    //    editorOptions: {
-    //      showSpinButtons: true,
-    //      useLargeSpinButtons: false,
-    //      min: 0, height: 60
-    //    }, allowFiltering: false
-    //  },
-    //  { dataField: 'deldate', caption: 'DELIVER', dataType: 'date', format: 'dd/MM/yyyy', allowFiltering: false, width:"13%" },
-    //  { dataField: 'note', caption: 'NOTE', cellTemplate: 'remTemplate', editCellTemplate: 'dataCellTemplate', allowFiltering: false, width:"15%" }
-
   ];
   columns2 = [
     { dataField: 'icode', caption: 'ITEM DESCRIPTION',  cellTemplate: 'infoTemplate3', width: '65%' },
     { dataField: 'icode', caption: 'ORDER',  cellTemplate: 'infoTemplate4', width: '35%' }
-  
   ];
 
   constructor(private auth: AuthserviceService,
@@ -350,6 +337,19 @@ export class NewOrderComponent implements OnInit, CanComponentDeactivate {
     this.isMakeOrder=true;
     this.currentItem = icode;
     this.currentUOM = uom;
+    let found = this.custitems.find(x=>x.icode==this.currentItem && x.uom==this.currentUOM);
+    if (found!=null){
+      this.rform.get('qty').setValue(found.qty);
+      let dstr = new Date(found.deldate);
+      let ddate = new Date(dstr.getFullYear(),dstr.getMonth(),dstr.getDate()+1);
+      console.log(dstr);
+      this.rform.get('deldate').setValue(ddate.toISOString().substring(0,10));
+      this.rform.get('note').setValue(found.note);
+    }else{
+      this.rform.get('qty').setValue(null);
+      this.rform.get('deldate').setValue(null);
+      this.rform.get('note').setValue(null);
+    }
   }
 
   onAddOrder(){

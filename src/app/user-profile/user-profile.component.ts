@@ -4,9 +4,9 @@ import { Http,Headers } from "@angular/http";
 import { Router } from "@angular/router";
 
 import { AuthserviceService } from "app/authservice.service";
-import { CustomerProfile } from "app/entities/cust-profile";
 import { CanComponentDeactivate } from "app/canDeactivateGuard";
 import { Observable } from "rxjs/Observable";
+import { CustomerProfile } from 'app/entities/models';
 
 
 @Component({
